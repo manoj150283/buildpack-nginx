@@ -5,7 +5,7 @@ set -e
 set -o pipefail
 
 # Nginx 1.6.2
-NGINX_VERSION="1.8.0"
+NGINX_VERSION="1.6.2"
 NGINX_TARBALL="nginx-${NGINX_VERSION}.tar.gz"
 PCRE_VERSION="8.38"
 PCRE_TARBALL="pcre-${PCRE_VERSION}.tar.gz"
@@ -70,7 +70,30 @@ if [[ ! -f "${CACHE_DIR}/bin/nginx" ]]; then
     --with-file-aio \
     --with-zlib=../zlib-${ZLIB_VERSION} \
     --with-pcre \
-    --with-cc-opt="-O2 -static -static-libgcc"
+    --with-cc-opt="-O2 -static -static-libgcc" \
+    --with-http_charset_module \
+    --with-http_ssi_module \
+    --with-http_userid_module \
+    --with-http_access_module \
+    --with-http_auth_basic_module \
+    --with-http_autoindex_module \
+    --with-http_geo_module \
+    --with-http_map_module \
+    --with-http_split_clients_module \
+    --with-http_referer_module \
+    --with-http_proxy_module \
+    --with-http_fastcgi_module \
+    --with-http_uwsgi_module \
+    --with-http_scgi_module \
+    --with-http_memcached_module \
+    --with-http_empty_gif_module \
+    --with-http_browser_module \
+    --with-http_upstream_ip_hash_module \
+    --with-http_upstream_least_conn_module \
+    --with-http_upstream_keepalive_module \
+    --with-mail_pop3_module \
+    --with-mail_imap_module \
+    --with-mail_smtp_module
 
   sed -i "/CFLAGS/s/ \-O //g" objs/Makefile
 
